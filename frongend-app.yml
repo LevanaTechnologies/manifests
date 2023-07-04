@@ -82,8 +82,12 @@ spec:
               memory: 64Mi
            limits:
              cpu: 210m
+<<<<<<< HEAD
              memory: 64Mi
 >>>>>>> 645d1333d25bfd2cdfe2cdb7449649cb505a8bd5
+=======
+             memory: 128Mi
+>>>>>>> parent of 645d133 (Update frongend-app.yml)
 
 ---
 
