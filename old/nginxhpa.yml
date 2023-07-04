@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxdep
+  namespace: k8s-practice
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 30
+  selector:
+    matchLabels:
+      app: nginxpod
+  template:
+    metadata: 
+      name: nginxpod
+      labels:
+        app: nginxpod
+    spec:
+      containers:
+      - name: nginxcont
+        image: nginx
+        ports:
+        - containerPort: 80
+        resources:
+          requests: 
+            cpu: "100m"
+            memory: "64Mi"
+          limits:
+            cpu: "100m" 
+            memory: "64Mi"
+
+---
+
+apiVersion: v1
+kind: Service 
+metadata: 
+  name: nginxsvc
+  namespace: k8s-practice
+spec:
+  type: NodePort
+  selector:
+    app: nginxpod
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30001
+
+---
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginxhpa
+  namespace: k8s-practice
+spec:
+  minReplicas: 2
+  maxReplicas: 5
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginxdep
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 50
+    
+
+   

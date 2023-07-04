@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: mdbrs
+  namespace: k8s-practice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mdbpod
+  template:
+    metadata:
+      name: mdbpod
+      labels:
+        app: mdbpod
+    spec:
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+      volumes:
+      - name: backend-volume
+        persistentVolumeClaim: 
+          claimName: backend-pvc
+      containers:
+      - name: mdbcontainer
+        image: mongo
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: devdb
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: devdb@123
+        volumeMounts:
+        - name: backend-volume
+          mountPath: /data/db
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:         
+  name: backend-pvc
+  namespace: k8s-practice
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Mi
+  storageClassName: nfs-storageclass
+
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mdbsvc
+  namespace: k8s-practice
+spec:
+  type: ClusterIP
+  selector:
+    app: mdbpod
+  ports:
+  - port: 27017
+    targetPort: 27017
