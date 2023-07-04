@@ -27,7 +27,6 @@ spec:
       - name: frontend-container
         labels:
           app: frontend-app
-<<<<<<< HEAD
         image: vnr1986/springmango:1
         ports:
         - containerPort: 8080
@@ -82,9 +81,7 @@ spec:
               memory: 64Mi
            limits:
              cpu: 210m
-             memory: 64Mi
->>>>>>> 645d1333d25bfd2cdfe2cdb7449649cb505a8bd5
-
+             memory: 128Mi
 ---
 
 apiVersion: v1
