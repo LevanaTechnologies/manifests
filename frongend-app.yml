@@ -11,45 +11,45 @@ spec:
     rollingupdate:
       maxSurge: 1
       maxUnavailable: 1
-    selector:
-      matchLabels:
+  selector:
+    matchLabels:
+      app: frontend-app
+  template:
+    metadata: 
+      name: frontend-app
+      labels:
         app: frontend-app
-    template:
-      metadata: 
-        name: frontend-app
+    spec:
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+      - name: frontend-container
         labels:
           app: frontend-app
-      spec:
-        securityContext:
-          runAsUser: 1000
-          fsGroup: 1000
-        containers:
-        - name: frontend-container
-          labels:
-            app: 
-          image: vnr1986/springmango:1
-          ports:
-          - containerPort: 8080
-          env:
-          - name: MONGO_DB_HOSTNAME
-            value: backend-svc
-          - name: MONGO_DB_USERNAME
-            valueFrom:
-              secret:
-                name: backend-secret
-                key: mongo_db_username
-          - name: MONGO_DB_PASSWORD
-            valueFrom:
-              secret:
-                name: backend-secret
-                key: mongo_db_password
-          resources:
-            request:
-              cpu: 200m
-              memory: 64Mi
-           limits:
-             cpu: 210m
-             memory: 128Mi
+        image: vnr1986/springmango:1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_DB_HOSTNAME
+          value: backend-svc
+        - name: MONGO_DB_USERNAME
+          valueFrom:
+            secret:
+              name: backend-secret
+              key: mongo_db_username
+        - name: MONGO_DB_PASSWORD
+          valueFrom:
+            secret:
+              name: backend-secret
+              key: mongo_db_password
+        resources:
+          request:
+            cpu: 200m
+            memory: 64Mi
+          limits:
+            cpu: 210m
+            memory: 128Mi
 
 ---
 
@@ -64,7 +64,7 @@ spec:
     app: frontend-app
   ports:
   - port: 80
-    targetPort:
+    targetPort: 8080
     nodePort: 30010
 
 
