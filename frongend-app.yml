@@ -27,6 +27,7 @@ spec:
       - name: frontend-container
         labels:
           app: frontend-app
+<<<<<<< HEAD
         image: vnr1986/springmango:1
         ports:
         - containerPort: 8080
@@ -50,6 +51,39 @@ spec:
           limits:
             cpu: 210m
             memory: 128Mi
+=======
+      spec:
+        securityContext:
+          runAsUser: 1000
+          fsGroup: 1000
+        containers:
+        - name: frontend-container
+          labels:
+            app: 
+          image: vnr1986/springmango:1
+          ports:
+          - containerPort: 8080
+          env:
+          - name: MONGO_DB_HOSTNAME
+            value: backend-svc
+          - name: MONGO_DB_USERNAME
+            valueFrom:
+              secret:
+                name: backend-secret
+                key: mongo_db_username
+          - name: MONGO_DB_PASSWORD
+            valueFrom:
+              secret:
+                name: backend-secret
+                key: mongo_db_password
+          resources:
+            request:
+              cpu: 200m
+              memory: 64Mi
+           limits:
+             cpu: 210m
+             memory: 64Mi
+>>>>>>> 645d1333d25bfd2cdfe2cdb7449649cb505a8bd5
 
 ---
 
