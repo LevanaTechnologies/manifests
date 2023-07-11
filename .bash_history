@@ -497,3 +497,97 @@ kubectl get pods -o wide
 kubectl get all
 clear
 kubectl get nodes
+clear
+kubectl get nodes
+kubectl geta ll
+kubectl get all
+kubectl delete all --all
+kubectl get pv
+kubectl get pvc
+kubectl delete backendpvc
+kubectl delete  pvcbackendpvc
+kubectl delete  pvc backendpvc
+kubectl delete pv pvc-12ae1c0e-0cf6-4e3c-88ce-b1fb3dcc18d4
+kubectl get sc
+clear
+kubectl get all
+kubectl config view
+kubectl config set-context --current --namespace=k8s-practice
+wget https://github.com/LevanaTechnologies/manifests.git
+ls
+cat manifests.git 
+clear
+git --version
+git init
+git add vnr1 https://github.com/LevanaTechnologies/manifests.git
+git config --global user.name venkatesh
+git config --global user.email vnrangisetti@gmail.com
+git config --global --view
+git add alias vnr1 https://github.com/LevanaTechnologies/manifests.git
+ls
+git status
+vi .gitignore
+clear
+git status
+git remote -vb
+git remote add vnr1 .Xauthority
+clear
+git remote add vnr1 https://github.com/LevanaTechnologies/manifests.git
+git remote add rvn https://github.com/LevanaTechnologies/manifests.git
+git pull rvn
+git status
+git pull rvn
+git pull rvn master
+git statu
+git status
+git merge rvn master
+rm -rf .gitignore 
+git pull rvn devops
+ls
+git logs
+git log
+git push rvn devops
+git pull rvn devops
+git status
+clear
+git status
+git add .
+git commit -m "from client server"
+git push rvn devops
+git status
+git add *
+git push rvn devops
+git remote
+git remote push rvn devops
+git remote remove vnr1
+git remote get-rul --push --all rvn
+git remote
+git config
+git config --get-all
+git config -l
+clear
+git status
+git branches
+git branch
+git branch devops
+git branch
+git branch -t devops 
+git branch 
+git branch --help
+ls
+git status
+git add .
+git commit -m  ""
+git log
+git pull rvn 
+git checkout devops 
+git push rvn devops
+ls
+git status
+git checkout master
+git add *
+git checkout devops
+ls
+clear
+ls
+git status

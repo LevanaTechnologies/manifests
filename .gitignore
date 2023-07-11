@@ -1,2 +1,4 @@
 #Ignore all pem files(private keys)
 *.pem
+.*
+*.*
